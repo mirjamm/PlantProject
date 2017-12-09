@@ -18,12 +18,7 @@ namespace PlantProjectC.Controllers {
 
         [HttpGet("[action]")]
         public List<Plant> GetPlants() {
-            var plants = _repository.Plants.ToList();
-            plants.Add(new Plant {
-                Id = 2, Name = "test test", Conservation = new Conservation(), Familia = new Familia(),
-                Family = new Family(), LatinName = "", Phylum = new Phylum()
-            });
-            return plants;
+            return _repository.Plants.ToList();
         }
 
         [HttpPost]
@@ -34,6 +29,16 @@ namespace PlantProjectC.Controllers {
                 );
             _repository.SaveChanges();
             return StatusCode(200);
+        }
+
+        [HttpGet("[action]")]
+        public List<Family> GetFamilies() {
+            return _repository.Familys.ToList();
+        }
+
+        [HttpGet("[action]")]
+        public List<Genus> GetGenus() {
+            return _repository.Genus.ToList();
         }
     }
 }

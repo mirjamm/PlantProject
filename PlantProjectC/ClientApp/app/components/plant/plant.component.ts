@@ -15,7 +15,6 @@ export class PlantComponent {
     public plants: Plant[];
 
     public getPlants() {
-        console.log("asd")
         this.plantService.getPlants().subscribe(result => {
             this.plants = result.json() as Plant[];
         });

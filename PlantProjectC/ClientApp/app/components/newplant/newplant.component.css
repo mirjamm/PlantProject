@@ -1,0 +1,17 @@
+﻿body {
+}
+
+select {
+    width: 100%;
+    border-radius: 4px;
+    height: 34px;
+    border: 1px solid #ccc;
+}
+
+tr{
+    height:40px;
+}
+
+table{
+    width:90%;
+}

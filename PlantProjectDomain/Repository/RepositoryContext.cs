@@ -13,9 +13,8 @@ namespace PlantProjectDomain.Repository {
 
         public DbSet<Plant> Plants { get; set; }
         public DbSet<Conservation> Conservations { get; set; }
-        public DbSet<Familia> Familias { get; set; }
         public DbSet<Family> Familys { get; set; }
-        public DbSet<Phylum> Phylums { get; set; }
+        public DbSet<Genus> Genus { get; set; }
 
         IQueryable<Plant> IRepository.Plants {
             get { return Plants; }
@@ -25,16 +24,12 @@ namespace PlantProjectDomain.Repository {
             get { return Conservations; }
         }
 
-        IQueryable<Familia> IRepository.Familias {
-            get { return Familias; }
+        IQueryable<Genus> IRepository.Genus {
+            get { return Genus; }
         }
 
         IQueryable<Family> IRepository.Familys {
             get { return Familys; }
-        }
-
-        IQueryable<Phylum> IRepository.Phylums {
-            get { return Phylums; }
         }
 
         public void AddPlant(Plant item) {
@@ -45,15 +40,11 @@ namespace PlantProjectDomain.Repository {
             Conservations.Add(item);
         }
 
-        public void AddFamilia(Familia item) {
+        public void AddGenus(Genus item) {
             throw new NotImplementedException();
         }
 
         public void AddFamily(Family item) {
-            throw new NotImplementedException();
-        }
-
-        public void AddPhylum(Phylum item) {
             throw new NotImplementedException();
         }
 

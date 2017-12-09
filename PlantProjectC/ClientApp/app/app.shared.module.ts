@@ -9,6 +9,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { PlantComponent } from './components/plant/plant.component';
 import { PlantService } from './services/plant.service';
+import { NewplantComponent } from './components/newplant/newplant.component';
 //import { DialogComponent } from './components/dialog/dialog.component';
 
 @NgModule({
@@ -16,7 +17,8 @@ import { PlantService } from './services/plant.service';
         AppComponent,
         NavMenuComponent,
         PlantComponent,
-        HomeComponent
+        HomeComponent,
+        NewplantComponent
     ],
     imports: [
         CommonModule,
@@ -26,6 +28,7 @@ import { PlantService } from './services/plant.service';
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'plants', component: PlantComponent },
+            { path: 'newplant', component: NewplantComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],

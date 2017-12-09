@@ -26,10 +26,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\components\newplant\newplant.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PlantProjectDomain\PlantProjectDomain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\newplant\newplant.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\app.models.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\plant.service.ts" />
   </ItemGroup>
