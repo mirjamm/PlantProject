@@ -1,0 +1,21 @@
+<h1>Plants</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+<p *ngIf="!forecasts"><em>Loading...</em></p>
+<div><button [routerLink]="['/newplant']">Add</button></div>
+<table class='table' *ngIf="plants">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let plant of plants">
+            <td>{{ plant.id }}</td>
+            <td>{{ plant.name }}</td>
+        </tr>
+    </tbody>
+</table>
+
