@@ -33,19 +33,35 @@ namespace PlantProjectDomain.Repository {
         }
 
         public void AddPlant(Plant item) {
+            Plants.Add(item);
+        }
 
+        public void RemovePlant(Plant item) {
+            Plants.Remove(item);
         }
 
         public void AddConservation(Conservation item) {
             Conservations.Add(item);
         }
 
+        public void RemoveConservation(Conservation item) {
+            Conservations.Remove(item);
+        }
+
         public void AddGenus(Genus item) {
-            throw new NotImplementedException();
+            Genus.Add(item);
+        }
+
+        public void RemoveGenus(Genus item) {
+            Genus.Remove(item);
         }
 
         public void AddFamily(Family item) {
-            throw new NotImplementedException();
+            Familys.Add(item);
+        }
+
+        public void RemoveFamily(Family item) {
+            Familys.Remove(item);
         }
 
         public new void SaveChanges() {

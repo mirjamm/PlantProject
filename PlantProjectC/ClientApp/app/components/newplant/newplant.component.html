@@ -7,7 +7,7 @@
     </tr>
     <tr>
         <td>Latin Name</td>
-        <td><input type="text" /></td>
+        <td><input type="text" [(ngModel)]="latinName" ngDefaultControl/></td>
     </tr>
     <tr>
         <td>Family</td>
@@ -20,8 +20,16 @@
     <tr>
         <td>Genus</td>
         <td>
-            <select>
-                <option *ngFor="let gen of genus">{{gen.name}}</option>
+            <select [(ngModel)]="selectedGenus">
+                <option *ngFor="let gen of genus" [ngValue]="gen" ngDefaultControl>{{gen.name}}</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>Conservation</td>
+        <td>
+            <select [(ngModel)]="selectedConservation">
+                <option *ngFor="let con of conservations" [ngValue]="con" ngDefaultControl>{{con.name}}</option>
             </select>
         </td>
     </tr>

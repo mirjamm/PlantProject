@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './components/app/app.component';
@@ -9,8 +9,9 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { PlantComponent } from './components/plant/plant.component';
 import { PlantService } from './services/plant.service';
-import { NewplantComponent } from './components/newplant/newplant.component';
-//import { DialogComponent } from './components/dialog/dialog.component';
+import { NewPlantComponent } from './components/newplant/newplant.component';
+import { EditPlantComponent } from './components/editplant/editplant.component';
+import { PlatformRef } from '@angular/core';
 
 @NgModule({
     declarations: [
@@ -18,21 +19,23 @@ import { NewplantComponent } from './components/newplant/newplant.component';
         NavMenuComponent,
         PlantComponent,
         HomeComponent,
-        NewplantComponent
+        NewPlantComponent,
+        EditPlantComponent
     ],
     imports: [
         CommonModule,
-        HttpModule,
+        HttpClientModule,
         FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'plants', component: PlantComponent },
-            { path: 'newplant', component: NewplantComponent },
+            { path: 'newplant', component: NewPlantComponent },
+            { path: 'editplant/:id', component: EditPlantComponent },
             { path: '**', redirectTo: 'home' }
         ])
     ],
-    providers: [PlantService],
+    providers: [PlantService, PlatformRef],
     //entryComponents: [DialogComponent]
 })
 export class AppModuleShared {

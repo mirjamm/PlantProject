@@ -15,6 +15,10 @@ namespace PlantProjectDomain.Repository {
         void AddConservation(Conservation item);
         void AddFamily(Family item);
         void AddGenus(Genus item);
+        void RemovePlant(Plant item);
+        void RemoveConservation(Conservation item);
+        void RemoveFamily(Family item);
+        void RemoveGenus(Genus item);
         void SaveChanges();
     }
 }

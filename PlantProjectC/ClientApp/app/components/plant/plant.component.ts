@@ -1,30 +1,30 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { Http } from '@angular/http';
 import { PlantService } from '../../services/plant.service';
 import { Plant } from '../../shared/app.models';
 
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'plant',
     templateUrl: './plant.component.html'
 })
-export class PlantComponent {
+export class PlantComponent implements OnInit {
+    plants: Plant[];
+
     constructor(private plantService: PlantService) {
+    }
+
+    public ngOnInit() {
         this.getPlants();
     }
-    public plants: Plant[];
 
     public getPlants() {
-        this.plantService.getPlants().subscribe(result => {
-            this.plants = result.json() as Plant[];
-        });
+        this.plantService.getPlants().subscribe(res => { this.plants = res }, error => { console.log(error) });
     }
-    
-   
-    //constructor(http: Http) {
-    //    http.get( 'api/Plant/GetPlants').subscribe(result => {
-    //        console.log(result);
-    //        this.plants = result.json() as Plant[];
-    //    }, error => console.error(error));
-    //}
+
+    public deletePlant(id: number) {
+        this.plantService.deletePlant(id).subscribe(res => {
+            this.getPlants();;
+        }, error => console.log(error.message));
+    }
 }

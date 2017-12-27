@@ -1,20 +1,26 @@
 <h1>Plants</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
-
-<p *ngIf="!forecasts"><em>Loading...</em></p>
+<p *ngIf="!plants"><em>Loading...</em></p>
 <div><button class="btn btn-default" [routerLink]="['/newplant']">Add</button></div>
 <table class='table' *ngIf="plants">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
+            <th style="width:18%">Name</th>
+            <th style="width:18%">LatinName</th>
+            <th style="width:18%">Family</th>
+            <th style="width:15%">Genus</th>
+            <th style="width:15%">Conservation</th>
+            <th style="width:16%"></th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let plant of plants">
-            <td>{{ plant.id }}</td>
             <td>{{ plant.name }}</td>
+            <td>{{ plant.latinName }}</td>
+            <td>{{ plant.family }}</td>
+            <td>{{ plant.genus }}</td>
+            <td>{{ plant.conservation }}</td>
+            <td><button class="btn btn-primary" style="margin-right:5px;" [routerLink]="['/editplant',plant.id]">Edit</button><button class="btn btn-default" (click)="deletePlant(plant.id)" >Delete {{plant.id}}</button></td>
         </tr>
     </tbody>
 </table>
