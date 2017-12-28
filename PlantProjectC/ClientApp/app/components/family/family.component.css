@@ -1,4 +1,10 @@
-﻿body {
+﻿.btn-primary {
+    margin-left:5px;
+    margin-bottom:2px;
+}
+
+.btn-default {
+    float:right;
 }
 
 select {
@@ -9,19 +15,19 @@ select {
 }
 
 input {
-    width: 100%;
+    width: 400px;
     border-radius: 4px;
     height: 34px;
     border: 1px solid #ccc;
 }
 
-tr{
-    height:40px;
+tr {
+    height: 40px;
 }
 
 table {
     position: absolute;
-    top: 70px;
+    top: 100px;
     width: 90%;
 }
 
@@ -29,5 +35,5 @@ table {
     position: absolute;
     top: 10px;
     width: 400px;
-    right:90px;
+    right: 90px;
 }

@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\components\editplant\editplant.component.ts" />
+    <None Remove="ClientApp\app\components\family\family.component.ts" />
     <None Remove="ClientApp\app\components\newplant\newplant.component.ts" />
   </ItemGroup>
 
@@ -36,9 +37,15 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\editplant\editplant.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\family\family.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\genus\genus.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\newplant\newplant.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\app.models.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\plant.service.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\app\components\conservation\" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

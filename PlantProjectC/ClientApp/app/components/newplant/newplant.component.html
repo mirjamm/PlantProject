@@ -1,27 +1,32 @@
 ﻿<h1>Add new plant</h1>
-
+<div class="alert alert-danger" *ngIf="isErrorMessage">
+    {{errorMessage}}
+</div>
+<div class="alert alert-success" *ngIf="successMessage">
+    {{successMessage}}
+</div>
 <table>
     <tr>
         <td>Name</td>
-        <td><input type="text" [(ngModel)]="name" ngDefaultControl /></td>
+        <td><input type="text" [(ngModel)]="name" /></td>
     </tr>
     <tr>
         <td>Latin Name</td>
-        <td><input type="text" [(ngModel)]="latinName" ngDefaultControl/></td>
+        <td><input type="text" [(ngModel)]="latinName" /></td>
     </tr>
     <tr>
         <td>Family</td>
         <td>
-        <select [(ngModel)]="selectedFamily">
-            <option *ngFor="let family of families" [ngValue]="family" ngDefaultControl>{{family.name}}</option>
-        </select>
+            <select [(ngModel)]="selectedFamily">
+                <option *ngFor="let family of families" [selected]="family.name == '--Select--'">{{family.name}}</option>
+            </select>
         </td>
     </tr>
     <tr>
         <td>Genus</td>
         <td>
             <select [(ngModel)]="selectedGenus">
-                <option *ngFor="let gen of genus" [ngValue]="gen" ngDefaultControl>{{gen.name}}</option>
+                <option *ngFor="let gen of genus" [selected]="gen.name == '--Select--'">{{gen.name}}</option>
             </select>
         </td>
     </tr>
@@ -29,14 +34,14 @@
         <td>Conservation</td>
         <td>
             <select [(ngModel)]="selectedConservation">
-                <option *ngFor="let con of conservations" [ngValue]="con" ngDefaultControl>{{con.name}}</option>
+                <option *ngFor="let con of conservations" [selected]="con.name == '--Select--'">{{con.name}}</option>
             </select>
         </td>
     </tr>
     <tr>
         <td colspan="2">
             <button class="btn btn-primary" (click)="addPlant()">Add</button>
-            <button class="btn btn-default">Cancel</button>
+            <button class="btn btn-default" (click)="cancel()">Cancel</button>
         </td>
     </tr>
 </table>

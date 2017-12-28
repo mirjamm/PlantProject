@@ -9,8 +9,7 @@ using PlantProjectDomain.Domain;
 
 namespace PlantProjectC.Controllers {
     [Route("api/[controller]")]
-    public class ConservationController : Controller
-    {
+    public class ConservationController : Controller {
         private readonly IRepository _repository;
         public ConservationController(IRepository repository) {
             _repository = repository;

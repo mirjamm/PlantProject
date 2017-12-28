@@ -46,17 +46,45 @@ namespace PlantProjectC.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] PlantModel plant) {
-            var newplant = new Plant() {
-                Name = plant.Name,
-                LatinName = plant.LatinName,
-                Conservation = _repository.Conservations.Where(c => c.Name == plant.Conservation).FirstOrDefault(),
-                Family = _repository.Familys.Where(c => c.Name == plant.Family).FirstOrDefault(),
-                Genus = _repository.Genus.Where(c => c.Name == plant.Genus).FirstOrDefault(),
+        public ResponseModel Post([FromBody] PlantModel plant) {
+            var response = new ResponseModel {
+                IsError = false
             };
-            _repository.AddPlant(newplant);
-            _repository.SaveChanges();
-            return StatusCode(204);
+            if (string.IsNullOrEmpty(plant.Name)) {
+                response.IsError = true;
+                response.ErrorMessage = "Please add name.";
+            }
+            if (string.IsNullOrEmpty(plant.LatinName)) {
+                response.IsError = true;
+                response.ErrorMessage = "Please add latin name.";
+            }
+            var conservation = _repository.Conservations.Where(c => c.Name == plant.Conservation).FirstOrDefault();
+            if (conservation == null) {
+                response.IsError = true;
+                response.ErrorMessage = "Please select conservation.";
+            }
+            var family = _repository.Familys.Where(c => c.Name == plant.Family).FirstOrDefault();
+            if (family == null) {
+                response.IsError = true;
+                response.ErrorMessage = "Please select family.";
+            }
+            var genus = _repository.Genus.Where(c => c.Name == plant.Genus).FirstOrDefault();
+            if (genus == null) {
+                response.IsError = true;
+                response.ErrorMessage = "Please select genus.";
+            }
+            if (!response.IsError) {
+                var newplant = new Plant() {
+                    Name = plant.Name,
+                    LatinName = plant.LatinName,
+                    Conservation = conservation,
+                    Family = family,
+                    Genus = genus
+                };
+                _repository.AddPlant(newplant);
+                _repository.SaveChanges();
+            }
+            return response;
         }
 
         [HttpDelete("{id}")]
@@ -74,35 +102,41 @@ namespace PlantProjectC.Controllers {
             };
             var editablePlant = _repository.Plants.Include(p => p.Genus).Include(p => p.Family).Include(p => p.Conservation)
                 .Where(p => p.Id == plant.Id).FirstOrDefault();
-            if (editablePlant.LatinName != plant.LatinName) {
+            if (string.IsNullOrEmpty(plant.LatinName)) {
+                response.IsError = true;
+                response.ErrorMessage = "Please add latin name.";
+            } else if (editablePlant.LatinName != plant.LatinName) {
                 editablePlant.LatinName = plant.LatinName;
             }
-            if (editablePlant.Name != plant.Name) {
+            if (string.IsNullOrEmpty(plant.Name)) {
+                response.IsError = true;
+                response.ErrorMessage = "Please add name.";
+            } else if (editablePlant.Name != plant.Name) {
                 editablePlant.Name = plant.Name;
             }
-            if (editablePlant.Genus.Name != plant.Genus) {
+            if (editablePlant.Genus == null || editablePlant.Genus.Name != plant.Genus) {
                 var selectedGenus = _repository.Genus.Where(g => g.Name == plant.Genus).FirstOrDefault();
                 if (selectedGenus == null) {
                     response.IsError = true;
-                    response.ErrorMessage = "Please select genus";
+                    response.ErrorMessage = "Please select genus.";
                 } else {
                     editablePlant.Genus = selectedGenus;
                 }
             }
-            if (editablePlant.Conservation.Name != plant.Conservation) {
+            if (editablePlant.Conservation == null || editablePlant.Conservation.Name != plant.Conservation) {
                 var selectedConservation = _repository.Conservations.Where(g => g.Name == plant.Conservation).FirstOrDefault();
                 if (selectedConservation == null) {
                     response.IsError = true;
-                    response.ErrorMessage = "Please select conservation";
+                    response.ErrorMessage = "Please select conservation.";
                 } else {
                     editablePlant.Conservation = selectedConservation;
                 }
             }
-            if (editablePlant.Family.Name != plant.Family) {
+            if (editablePlant.Family == null || editablePlant.Family.Name != plant.Family) {
                 var selectedFamily = _repository.Familys.Where(g => g.Name == plant.Family).FirstOrDefault();
                 if (selectedFamily == null) {
                     response.IsError = true;
-                    response.ErrorMessage = "Please select family";
+                    response.ErrorMessage = "Please select family.";
                 } else {
                     editablePlant.Family = selectedFamily;
                 }

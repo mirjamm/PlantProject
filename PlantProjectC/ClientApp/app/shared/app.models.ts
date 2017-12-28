@@ -8,17 +8,17 @@
 }
 
 export interface Family {
-    id: number;
+    id?: number;
     name: string;
 }
 
 export interface Genus {
-    id: number;
+    id?: number;
     name: string;
 }
 
 export interface Conservation {
-    id: number;
+    id?: number;
     name: string;
 }
 

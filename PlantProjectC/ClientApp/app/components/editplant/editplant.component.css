@@ -20,5 +20,14 @@ tr{
 }
 
 table{
+    position:absolute;
+    top:70px;
     width:90%;
+}
+
+.alert {
+    position: absolute;
+    top: 10px;
+    width: 400px;
+    right: 90px;
 }

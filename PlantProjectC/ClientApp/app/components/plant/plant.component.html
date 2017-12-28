@@ -20,7 +20,7 @@
             <td>{{ plant.family }}</td>
             <td>{{ plant.genus }}</td>
             <td>{{ plant.conservation }}</td>
-            <td><button class="btn btn-primary" style="margin-right:5px;" [routerLink]="['/editplant',plant.id]">Edit</button><button class="btn btn-default" (click)="deletePlant(plant.id)" >Delete {{plant.id}}</button></td>
+            <td><button class="btn btn-primary" style="margin-right:5px;" [routerLink]="['/editplant',plant.id]">Edit</button><button class="btn btn-default" (click)="deletePlant(plant.id)" >Delete</button></td>
         </tr>
     </tbody>
 </table>

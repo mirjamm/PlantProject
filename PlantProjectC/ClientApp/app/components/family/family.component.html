@@ -1,0 +1,29 @@
+﻿<h1>Families</h1>
+<div class="alert alert-danger" *ngIf="isErrorMessage">
+    {{errorMessage}}
+</div>
+<div class="alert alert-success" *ngIf="isSuccessMessage">
+    {{successMessage}}
+</div>
+
+<div>
+    <input type="text" [(ngModel)]="name" />
+    <button class="btn btn-primary" (click)="add()">Add</button>
+</div>
+
+<p *ngIf="!families"><em>Loading...</em></p>
+<table class='table' *ngIf="families">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let family of families">
+            <td>{{ family.name }}</td>
+            <td><button class="btn btn-default" (click)="delete(family.id)">Delete</button></td>
+        </tr>
+    </tbody>
+</table>
+

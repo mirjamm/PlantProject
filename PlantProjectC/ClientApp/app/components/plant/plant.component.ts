@@ -23,8 +23,9 @@ export class PlantComponent implements OnInit {
     }
 
     public deletePlant(id: number) {
+        alert("Are you sure you want to delete this plant?");
         this.plantService.deletePlant(id).subscribe(res => {
-            this.getPlants();;
+            this.getPlants();
         }, error => console.log(error.message));
     }
 }

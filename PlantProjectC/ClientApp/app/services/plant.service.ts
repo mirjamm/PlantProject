@@ -1,9 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-
 import { Plant, Family, Genus, Conservation, ResponseModel } from '../shared/app.models';
 
 const baseUrl = "http://localhost:59421";
@@ -13,7 +10,7 @@ export class PlantService {
 
 
     public addPlant(plant: Plant) {
-        return this.http.post(baseUrl + "/api/Plant", plant);
+        return this.http.post<ResponseModel>(baseUrl + "/api/Plant", plant);
     }
 
     public editPlant(plant: Plant) {
@@ -36,8 +33,24 @@ export class PlantService {
         return this.http.get<Family[]>(baseUrl + "/api/Family");
     }
 
+    public addFamily(family: Family) {
+        return this.http.post<ResponseModel>(baseUrl + "/api/Family", family);
+    }
+
+    public deleteFamily(id: number) {
+        return this.http.delete(baseUrl + "/api/Family/" + id);
+    }
+
     public getGenus() {
         return this.http.get<Genus[]>(baseUrl + "/api/Genus");
+    }
+
+    public addGenus(genus: Genus) {
+        return this.http.post<ResponseModel>(baseUrl + "/api/Genus", genus);
+    }
+
+    public deleteGenus(id: number) {
+        return this.http.delete(baseUrl + "/api/Genus/" + id);
     }
 
     public getConservations() {

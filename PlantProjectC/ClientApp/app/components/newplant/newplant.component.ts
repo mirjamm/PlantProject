@@ -13,11 +13,14 @@ export class NewPlantComponent implements OnInit {
     families: Family[];
     genus: Genus[];
     conservations: Conservation[];
-    name = '';
-    latinName = '';
-    selectedFamily: Family;
-    selectedGenus: Genus;
-    selectedConservation: Conservation;
+    name: string;
+    latinName: string;
+    selectedFamily: string;
+    selectedGenus: string;
+    selectedConservation: string;
+    errorMessage: string;
+    successMessage: string;
+    isErrorMessage: boolean;
 
     ngOnInit(): void {
         this.getFamilies();
@@ -40,16 +43,30 @@ export class NewPlantComponent implements OnInit {
     }
 
     public addPlant() {
+        this.isErrorMessage = false;
         this.plantService.addPlant({
             name: this.name,
             latinName: this.latinName,
-            family: this.selectedFamily.name,
-            genus: this.selectedGenus.name,
-            conservation: this.selectedConservation.name
+            family: this.selectedFamily,
+            genus: this.selectedGenus,
+            conservation: this.selectedConservation
         }).subscribe(res => {
-            this.router.navigate(['plants']);
+            if (res.isError) {
+                this.isErrorMessage = true;
+                this.errorMessage = res.errorMessage;
+            } else {
+                this.successMessage = "Successfully saved changes.";
+                setTimeout(() => {
+                    this.router.navigate(['plants']);
+                }, 1500)
+            }
         }, error => {
+            this.errorMessage = error.message;
             console.log("er " + error.message)
         });
+    }
+
+    public cancel() {
+        this.router.navigate(['plants']);
     }
 }

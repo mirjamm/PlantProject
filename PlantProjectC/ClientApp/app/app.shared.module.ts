@@ -11,6 +11,9 @@ import { PlantComponent } from './components/plant/plant.component';
 import { PlantService } from './services/plant.service';
 import { NewPlantComponent } from './components/newplant/newplant.component';
 import { EditPlantComponent } from './components/editplant/editplant.component';
+import { FamilyComponent } from './components/family/family.component';
+import { GenusComponent } from './components/genus/genus.component';
+
 import { PlatformRef } from '@angular/core';
 
 @NgModule({
@@ -20,7 +23,9 @@ import { PlatformRef } from '@angular/core';
         PlantComponent,
         HomeComponent,
         NewPlantComponent,
-        EditPlantComponent
+        EditPlantComponent,
+        FamilyComponent,
+        GenusComponent
     ],
     imports: [
         CommonModule,
@@ -32,11 +37,13 @@ import { PlatformRef } from '@angular/core';
             { path: 'plants', component: PlantComponent },
             { path: 'newplant', component: NewPlantComponent },
             { path: 'editplant/:id', component: EditPlantComponent },
+            { path: 'family', component: FamilyComponent },
+            { path: 'genus', component: GenusComponent },
             { path: '**', redirectTo: 'home' }
+
         ])
     ],
     providers: [PlantService, PlatformRef],
-    //entryComponents: [DialogComponent]
 })
 export class AppModuleShared {
 }

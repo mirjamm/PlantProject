@@ -14,14 +14,17 @@ export class EditPlantComponent implements OnInit {
     families: Family[];
     genus: Genus[];
     conservations: Conservation[];
-    name = '';
-    selectedFamily = '';
-    selectedGenus = '';
-    selectedConservation = '';
-    latinName = '';
+    name: string;
+    selectedFamily: string;
+    selectedGenus: string;
+    selectedConservation: string;
+    latinName: string;
     id?: number;
     private sub: any;
     plant: Plant;
+    errorMessage: string;
+    successMessage: string;
+    isErrorMessage: boolean;
 
     constructor(private route: ActivatedRoute, private plantService: PlantService, private router: Router) {
 
@@ -49,7 +52,14 @@ export class EditPlantComponent implements OnInit {
     }
 
     public getFamilies() {
-        this.plantService.getFamilies().subscribe(data => this.families = data);
+        this.plantService.getFamilies().subscribe(data => {
+            this.families = data;
+            this.families.unshift({
+                name: '--Select--',
+                id: 0
+            });
+        });
+       
     }
 
     public getGenus() {
@@ -61,6 +71,7 @@ export class EditPlantComponent implements OnInit {
     }
 
     public save() {
+        this.isErrorMessage = false;
         this.plantService.editPlant({
             id: this.id,
             name: this.name,
@@ -70,9 +81,22 @@ export class EditPlantComponent implements OnInit {
             conservation: this.selectedConservation
         }).subscribe(res => {
             console.log(res)
-            this.router.navigate(['plants']);
-        },  error => {
+            if (res.isError) {
+                this.isErrorMessage = true;
+                this.errorMessage = res.errorMessage;
+            } else {
+                this.successMessage = "Successfully saved changes.";
+                setTimeout(() => {
+                    this.router.navigate(['plants']);
+                }, 1500)
+            }
+        }, error => {
+            this.errorMessage = error.message;
             console.log("er " + error.message)
         });
+    }
+
+    public cancel() {
+        this.router.navigate(['plants']);
     }
 }
