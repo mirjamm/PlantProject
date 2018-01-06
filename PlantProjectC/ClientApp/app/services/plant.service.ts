@@ -17,11 +17,11 @@ export class PlantService {
         return this.http.put<ResponseModel>(baseUrl + "/api/Plant", plant);
     }
 
-    public getPlants() {
-        return this.http.get<Plant[]>(baseUrl + "/api/Plant");
+    public getPlants(name?: string) {
+        return this.http.get<Plant[]>(baseUrl + "/api/Plant/?name=" + name);
     }
 
-    public getPlant(id: any) {
+    public getPlant(id: number) {
         return this.http.get<Plant>(baseUrl + "/api/Plant/" + id);
     }
 

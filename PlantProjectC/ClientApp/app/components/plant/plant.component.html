@@ -1,7 +1,11 @@
 <h1>Plants</h1>
 
 <p *ngIf="!plants"><em>Loading...</em></p>
-<div><button class="btn btn-default" [routerLink]="['/newplant']">Add</button></div>
+<div>
+    <input type="text" [(ngModel)]="searchedName" style="border-radius: 4px;height: 34px;border: 1px solid #ccc;"/>
+    <button class="btn btn-default" (click)="search()">Search</button>
+    <button class="btn btn-default" (click)="clear()">Clear</button>
+    <button class="btn btn-default" [routerLink]="['/newplant']">Add</button></div>
 <table class='table' *ngIf="plants">
     <thead>
         <tr>

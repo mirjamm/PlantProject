@@ -33,16 +33,20 @@ namespace PlantProjectC.Controllers {
         }
 
         [HttpGet]
-        public List<PlantModel> Get() {
-            var plants = _repository.Plants.Include(d => d.Conservation).Include(d => d.Family).Include(d => d.Genus).Select(p => new PlantModel {
+        public List<PlantModel> Get([FromQuery]string name = null) {
+            var plants = _repository.Plants.Include(d => d.Conservation).Include(d => d.Family).Include(d => d.Genus).ToList();
+            if (!string.IsNullOrEmpty(name)) {
+                plants = plants.Where(p => p.Name.Contains(name)).ToList();
+            }
+            var result = plants.Select(p => new PlantModel {
                 Name = p.Name,
                 LatinName = p.LatinName,
-                Conservation = p.Conservation.Name,
-                Family = p.Family.Name,
-                Genus = p.Genus.Name,
+                Conservation = p.Conservation != null ? p.Conservation.Name : "",
+                Family = p.Family != null ? p.Family.Name : "",
+                Genus = p.Genus != null ? p.Genus.Name : "",
                 Id = p.Id
             }).ToList();
-            return plants;
+            return result;
         }
 
         [HttpPost]

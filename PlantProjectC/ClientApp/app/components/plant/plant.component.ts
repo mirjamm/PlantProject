@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class PlantComponent implements OnInit {
     plants: Plant[];
+    searchedName: string;
 
     constructor(private plantService: PlantService) {
     }
@@ -19,7 +20,7 @@ export class PlantComponent implements OnInit {
     }
 
     public getPlants() {
-        this.plantService.getPlants().subscribe(res => { this.plants = res }, error => { console.log(error) });
+        this.plantService.getPlants("").subscribe(res => { this.plants = res }, error => { console.log(error) });
     }
 
     public deletePlant(id: number) {
@@ -27,5 +28,14 @@ export class PlantComponent implements OnInit {
         this.plantService.deletePlant(id).subscribe(res => {
             this.getPlants();
         }, error => console.log(error.message));
+    }
+
+    public search() {
+        this.plantService.getPlants(this.searchedName).subscribe(res => { this.plants = res }, error => { console.log(error) });
+    }
+
+    public clear() {
+        this.searchedName = "";
+        this.plantService.getPlants("").subscribe(res => { this.plants = res }, error => { console.log(error) });
     }
 }
